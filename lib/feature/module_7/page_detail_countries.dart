@@ -61,12 +61,18 @@ class _PageDetailCountriesState extends State<PageDetailCountries> {
     return ListView.builder(
       itemCount: data.countries?.length,
       itemBuilder: (BuildContext context, int index) {
-        return _buildItemCountries("${data.countries?[index].name}");
+        return Card(
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Text(
+                "${data.countries?[index].name} adalah ${data.countries?[index].iso3}"
+              ),
+            ),
+          ),
+        );
       },
     );
   }
 
-  Widget _buildItemCountries(String value) {
-    return Text(value);
-  }
 }
