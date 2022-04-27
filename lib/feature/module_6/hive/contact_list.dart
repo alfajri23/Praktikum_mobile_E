@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:mobile_b/model/contact_list_model.dart';
-import 'package:mobile_b/tools/common_submit_button.dart';
+import 'package:praktikum_mobile_2022_plug_e/model/contact_list_model.dart';
+import 'package:praktikum_mobile_2022_plug_e/tools/common_submit_button.dart';
 
 class ContactList extends StatefulWidget {
   const ContactList({Key? key}) : super(key: key);
@@ -12,46 +11,53 @@ class ContactList extends StatefulWidget {
 }
 
 class _ContactListState extends State<ContactList> {
-  Box<ContactListModel> localDB = Hive.box<ContactListModel>("contact_list");
+  TextEditingController _nameController = TextEditingController();
 
-  TextEditingController _inputController = TextEditingController();
+  Box<ContactListModel> localDB = Hive.box<ContactListModel>("contact_list");
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Hive Database"),
-      ),
-      body: Container(
-        padding: EdgeInsets.all(12),
-        child: Column(
-          children: [
-            _buildInputField(),
-            _buildSubmitButton(),
-            _buildList()
-          ],
+        appBar: AppBar(
+          title: Text("Hive Database"),
         ),
-      ),
-    );
+        body: Container(
+          padding: EdgeInsets.all(12),
+          child: Column(
+            children: [
+              _buildInputField(),
+              _buildSubmitButton(),
+              _buildDBList()
+            ],
+          ),
+        ));
   }
 
   Widget _buildInputField() {
-    return TextFormField(
-      controller: _inputController,
+    return Container(
+      child: TextFormField(
+        controller: _nameController,
+        decoration: InputDecoration(hintText: "Enter your name..."),
+      ),
     );
   }
 
   Widget _buildSubmitButton() {
-    return CommonSubmitButton(
-        labelButton: "Add Data",
-        submitCallback: (value) {
-          localDB.add(ContactListModel(name: _inputController.text));
-          _inputController.clear();
-          setState(() {});
-        });
+    return Container(
+      child: CommonSubmitButton(
+        labelButton: 'Add Name',
+        submitCallback: (String) {
+          if (_nameController.text.isNotEmpty) {
+            localDB.add(ContactListModel(name: _nameController.text));
+            _nameController.clear();
+            setState(() {});
+          }
+        },
+      ),
+    );
   }
 
-  Widget _buildList() {
+  Widget _buildDBList() {
     return Expanded(
       child: ValueListenableBuilder(
           valueListenable: localDB.listenable(),
@@ -64,7 +70,9 @@ class _ContactListState extends State<ContactList> {
 
             return ListView.builder(
               itemBuilder: (BuildContext context, int index) {
-                return Text("${localDB.getAt(index)!.name}");
+                return Center(
+                    child: Text("${localDB.get(index)!.name}")
+                );
               },
               itemCount: localDB.length,
             );

@@ -1,7 +1,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<<<<<<< HEAD
     package="com.example.mobile_b">
    <application
         android:label="mobile_b"
+=======
+    package="com.example.praktikum_mobile_2022_plug_e">
+   <application
+        android:label="praktikum_mobile_2022_plug_e"
+>>>>>>> fa55e97a5f935aab629a524effe1bd0f9777eab5
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

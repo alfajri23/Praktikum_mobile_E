@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:mobile_b/tools/common_submit_button.dart';
+import 'package:praktikum_mobile_2022_plug_e/tools/common_submit_button.dart';
 import 'image_picker_helper.dart';
 
 class ImagePickerSection extends StatefulWidget {
@@ -14,13 +14,18 @@ class _ImagePickerSectionState extends State<ImagePickerSection> {
   String imagePath = "";
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: [
-          _imageSection(),
-          _buttonSectionGallery(),
-          _buttonSectionCamera(),
-        ],
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Aplikasi Mobile"),
+      ),
+      body: Container(
+        child: Column(
+          children: [
+            _imageSection(),
+            _buttonSectionGallery(),
+            _buttonSectionCamera(),
+          ],
+        ),
       ),
     );
   }
@@ -63,7 +68,3 @@ class _ImagePickerSectionState extends State<ImagePickerSection> {
   }
 
 }
-
-
-
-

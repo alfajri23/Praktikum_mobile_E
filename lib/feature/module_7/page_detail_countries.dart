@@ -26,15 +26,15 @@ class _PageDetailCountriesState extends State<PageDetailCountries> {
       child: FutureBuilder(
         future: CovidDataSource.instance.loadCountries(),
         builder: (
-          BuildContext context,
-          AsyncSnapshot<dynamic> snapshot,
-        ) {
+            BuildContext context,
+            AsyncSnapshot<dynamic> snapshot,
+            ) {
           if (snapshot.hasError) {
             return _buildErrorSection();
           }
           if (snapshot.hasData) {
             CountriesModel countriesModel =
-                CountriesModel.fromJson(snapshot.data);
+            CountriesModel.fromJson(snapshot.data);
             return _buildSuccessSection(countriesModel);
           }
           return _buildLoadingSection();
@@ -75,4 +75,7 @@ class _PageDetailCountriesState extends State<PageDetailCountries> {
     );
   }
 
+  Widget _buildItemCountries(String value) {
+    return Text(value);
+  }
 }
