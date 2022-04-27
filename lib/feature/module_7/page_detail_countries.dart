@@ -62,14 +62,12 @@ class _PageDetailCountriesState extends State<PageDetailCountries> {
       itemCount: data.countries?.length,
       itemBuilder: (BuildContext context, int index) {
         return Card(
-          child: Center(
             child: Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(12.0),
               child: Text(
                 "${data.countries?[index].name} adalah ${data.countries?[index].iso3}"
               ),
             ),
-          ),
         );
       },
     );
